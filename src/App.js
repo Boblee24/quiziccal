@@ -6,12 +6,12 @@ import "./style.css";
 import { decode } from "html-entities";
 import { nanoid } from "nanoid";
 import Header from "./components/Header";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
+// import {QueryClient, QueryClientProvider} from "@tanstack/react-query"
 
 decode("&lt; &gt; &quot; &apos; &amp; &#169; &#8710;");
 
 function App() {
-  const client = new QueryClient()
+  // const client = new QueryClient()
   const [firstPage, setFirstPage] = React.useState(false);
   const [question, setQuestion] = React.useState([]);
   const [showResult, setShowResult] = React.useState(false);
@@ -30,44 +30,59 @@ function App() {
 
   function fetchData() {
     fetch("https://opentdb.com/api.php?amount=10")
-      .then((res) => res.json())
-      .then((data) => {
-        const extractedQuestion = data.results.map((question) => {
-          const answer = [
-            ...question.incorrect_answers,
-            question.correct_answer,
-          ];
-          return {
-            id: nanoid(),
-            question: question.question,
-            answers: shuffle(answer),
-            correctAnswer: question.correct_answer,
-            selectedAnswer: "",
-          };
-        });
-        // setQuizData(data.results)
-        setQuestion(extractedQuestion);
+  .then((res) => res.json())
+  .then((data) => {
+    // Check if data.results is an array and has elements
+    if (Array.isArray(data.results) && data.results.length > 0) {
+      const extractedQuestion = data.results.map((question) => {
+        const answer = [...question.incorrect_answers, question.correct_answer];
+        return {
+          id: nanoid(),
+          question: question.question,
+          answers: shuffle(answer),
+          correctAnswer: question.correct_answer,
+          selectedAnswer: "",
+        };
       });
+      setQuestion(extractedQuestion);
+    } else {
+      // Handle the case where there are no results (optional)
+      console.warn("No questions retrieved from API.");
+      // You can display a message to the user here
+    }
+  })
+  .catch((error) => {
+    console.error("Error fetching data:", error);
+    // Handle potential errors during data fetching (optional)
+  });
   }
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=10")
-      .then((res) => res.json())
-      .then((data) => {
-        const extractedQuestion = data.results.map((question) => {
-          const answer = [
-            ...question.incorrect_answers,
-            question.correct_answer,
-          ];
-          return {
-            id: nanoid(),
-            question: question.question,
-            answers: shuffle(answer),
-            correctAnswer: question.correct_answer,
-            selectedAnswer: "",
-          };
-        });
-        setQuestion(extractedQuestion);
+  .then((res) => res.json())
+  .then((data) => {
+    // Check if data.results is an array and has elements
+    if (Array.isArray(data.results) && data.results.length > 0) {
+      const extractedQuestion = data.results.map((question) => {
+        const answer = [...question.incorrect_answers, question.correct_answer];
+        return {
+          id: nanoid(),
+          question: question.question,
+          answers: shuffle(answer),
+          correctAnswer: question.correct_answer,
+          selectedAnswer: "",
+        };
       });
+      setQuestion(extractedQuestion);
+    } else {
+      // Handle the case where there are no results (optional)
+      console.warn("No questions retrieved from API.");
+      // You can display a message to the user here
+    }
+  })
+  .catch((error) => {
+    console.error("Error fetching data:", error);
+    // Handle potential errors during data fetching (optional)
+  });
   }, []);
 
   function numberOfAnswer() {
@@ -146,12 +161,12 @@ function App() {
   }
   return (
     <div className="wrapper">
-      <QueryClientProvider>
+      {/* <QueryClientProvider> */}
       <div className="container">
         <Header/>
         {firstPage ? createQuiz() : <Main changePage={changePage} />}
       </div>
-    </QueryClientProvider>
+    {/* </QueryClientProvider> */}
     </div>
   );
 }
