@@ -19,7 +19,7 @@ body{
     flex-direction: column;
 }
 .section2 {
-    margin: 30px 40px;
+    margin: 20px 15px;
     /* margin-top: 2.9rem; */
 }
 h1{
@@ -98,3 +98,8 @@ button{
     z-index: 10;
     -webkit-backdrop-filter: blur(10px);
 }
+@media screen and (min-width: 768px){
+    .section2 {
+        margin: nothing;
+    }
+  }
