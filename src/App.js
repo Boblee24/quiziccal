@@ -29,7 +29,7 @@ function App() {
   };
 
   function fetchData() {
-    fetch("https://opentdb.com/api.php?amount=10")
+    fetch("https://opentdb.com/api.php?amount=11")
   .then((res) => res.json())
   .then((data) => {
     // Check if data.results is an array and has elements
@@ -57,7 +57,7 @@ function App() {
   });
   }
   React.useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=10")
+    fetch("https://opentdb.com/api.php?amount=11")
   .then((res) => res.json())
   .then((data) => {
     // Check if data.results is an array and has elements

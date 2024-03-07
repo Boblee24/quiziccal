@@ -15,7 +15,7 @@ export default function Second(props){
     return(
     
         <section className="section2">
-            <h2>{decode(props.question)}</h2>
+            <h2 className="question">{decode(props.question)}</h2>
             <div className="box_for_options">
             {
                 props.answers.map((answer, index) => (

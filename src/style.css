@@ -38,8 +38,6 @@ button.welcome_button {
     width: 150px;
     font-family: 'Inter', sans-serif;
     padding: 10px 0;
-    /* outline: none; */
-    /* appearance: none; */
     border: none;
     cursor: pointer;
     font-size: 16px;
@@ -72,6 +70,7 @@ button.welcome_button {
 .box_for_options{
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
 }
 span{
     margin: 20px;
@@ -81,13 +80,14 @@ button{
     border: 1px solid #4D5B9E;
     outline: none;
     appearance: none;
-    padding: 5px 15px;
+    padding: 3px 13px;
     border-radius: 10px;
     color: #293264;
     background: none;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
 }
+
 .header{
     position: fixed;
     top:-1.5rem;
@@ -98,8 +98,14 @@ button{
     z-index: 10;
     -webkit-backdrop-filter: blur(10px);
 }
-@media screen and (min-width: 768px){
-    .section2 {
-        margin: nothing;
+@media screen and (max-width: 698px){
+    .question {
+        font-size: 1.1rem;
+    }
+    .box_for_options button {
+        font-size: .8rem;
+    }
+    h1 {
+        font-size: 27px;
     }
   }
